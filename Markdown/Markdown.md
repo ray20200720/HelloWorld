@@ -39,15 +39,15 @@ CO<sub>2</sub>
 
 如果在一行文字內可用單個 \`代碼\` 來標示
 
-例如: `Hello World` 
+例如: `Hello World`
 
 如果是一整段可以用3個 \`\`\` 代碼區塊 \`\`\`來顯示
 
-例如: 
+例如:
 
 ``` js
 console.log(Hello World)
-``` 
+```
 
 # 特殊符號
 
@@ -88,7 +88,7 @@ HelloWorld&reg;
     Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
     viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
-    Suspendisse id sem consectetuer libero luctus adipiscing.		
+    Suspendisse id sem consectetuer libero luctus adipiscing.
 
 
 # 表格
@@ -139,32 +139,26 @@ HelloWorld&reg;
 <h3 id="3">表格的使用</h3>
 <h3 id="4">頁內連結跳轉</h3>
 <h3 id="5">本地檔案連結</h3>
-[markdown.md](file:///D:/Ray/MyProject/GitHub/ray20140811/HelloWorld/Markdown/Markdown.md)
+[markdown.md](file:///D:/Project/HelloWorld/Markdown/Markdown.md)
 <h2 id="6">軟體推薦</h2>
 <h2 id="7">參考資料</h2>
 
-![圖標](http://static.runoob.com/images/runoob-logo.png)
-![圖標](http://static.runoob.com/images/runoob-logo.png "RUNOOB")
+![測試](https://github/ray20200720/HelloWorld/Markdown/HelloWorld.png)
+![測試](https://github/ray20200720/HelloWorld/Markdown/HelloWorld.png "HelloWorld")
 
+![圖片下面的敘述](D:\\Project\\HelloWorld\\HelloWorld.PNG)
+![圖片下面的敘述](D:\Project\HelloWorld\HelloWorld.PNG  "測試")
 
-![圖片下面的敘述](D:\\Ray\\MyProject\\ICON\\NANO.PNG)
-![圖片下面的敘述](D:\Ray\MyProject\ICON\NANO.PNG  "測試")
+<img src="D:\Project\HelloWorld\HelloWorld.PNG" width="50%">
 
-<img src="D:\Ray\MyProject\ICON\NANO.PNG" width="50%">
-
-| D:\Ray\MyProject\ICON\NANO.PNG |
+| D:\Project\HelloWorld\HelloWorld.PNG |
 |:--:|
 | <b>圖片下面的敘述</b>|
 
 
 <details close>
     <summary>
-      這裡可以進行摺疊 
+      這裡可以進行摺疊
     </summary>
       摺疊的內容: close是預設摺疊 open是預設打開
 </details>
-
-
-
-
-
