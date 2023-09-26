@@ -146,10 +146,11 @@ HelloWorld&reg;
 ![測試](https://github/ray20200720/HelloWorld/Markdown/HelloWorld.png)
 ![測試](https://github/ray20200720/HelloWorld/Markdown/HelloWorld.png "HelloWorld")
 
-![圖片下面的敘述](D:\\Project\\HelloWorld\\HelloWorld.PNG)
-![圖片下面的敘述](D:\Project\HelloWorld\HelloWorld.PNG  "測試")
+![圖片下面的敘述](./HelloWorld.PNG)
 
-<img src="D:\Project\HelloWorld\HelloWorld.PNG" width="50%">
+![圖片下面的敘述](./HelloWorld.png  "Hello World")
+
+<img src="./HelloWorld.png" width="50%">
 
 | D:\Project\HelloWorld\HelloWorld.PNG |
 |:--:|
