@@ -1,6 +1,6 @@
-# .NET 
+## .NET 
 
-## 創建 console 應用程式
+### 創建 console 應用程式
 
 ``` bash
 dotnet new console
@@ -11,13 +11,35 @@ dotnet new console
 dotnet new console -o HelloWorld
 ```
 
-## 運行 console 應用程式
+### 運行 console 應用程式
 
 ``` bash
 dotnet run
 ```
 
-## 修改 Program.cs 主程式
+### 發佈 console 應用程式
+
+``` bash
+dotnet publish -c Release
+```
+
+### 運行 發佈的 console 應用程式
+
+- Windows 下
+
+``` bash
+cd bin\Release\net7.0\
+HelloWorld.exe
+```
+
+- Linux 下
+
+``` bash
+cd bin/Release/net7.0/
+dotnet HelloWorld.dll
+```
+
+## Program.cs 主程式 完整版
 
 ``` cs
 // A skeleton of a C# program
