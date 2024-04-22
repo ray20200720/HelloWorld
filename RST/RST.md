@@ -1,6 +1,11 @@
 # RST
 
-## Install
+## What is RST
+
+reStructuredText（RST、ReST或reST）是一種用於文字資料的檔案格式，主要用於 Python 程式語言社群的技術文件。
+類似 Markdown, 安裝sphinx套件後,可以將 .rst檔案轉成 html
+
+## Install 
 
 ```
 pip install sphinx
@@ -75,3 +80,9 @@ build succeeded.
 
 The HTML pages are in _build\html.
 ```
+
+# Reference
+
+- [Sphinx - Getting Started](https://www.sphinx-doc.org/en/master/usage/quickstart.html)
+- [Markup Syntax and Parser Component of Docutils](https://docutils.sourceforge.io/rst.html)
+- [ReText](https://github.com/retext-project/retext)
