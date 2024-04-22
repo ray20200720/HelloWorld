@@ -9,12 +9,14 @@ Hello Wolrd 是電腦程式語言 C語言 內所介紹的第一個範例, 用來
     - Dapper
 - Layui
 - Markdown
+- Nginx
 - Node.js
     - marked
 - RST	
+- Scrapy
+- SpringBoot
 - SQLite
 - WebAPI
-- Vue
 
 
 
