@@ -15,6 +15,7 @@ Bash 是 **Bourne Again SHell** 的縮寫，是一種命令列介面與腳本語
    - 導航檔案系統：`cd`、`ls`、`pwd`。
    - 管理檔案與目錄：`cp`、`mv`、`rm`、`mkdir`。
    - 檢視檔案內容：`cat`、`less`、`head`、`tail`。
+   - 壓縮與解壓縮： [zip](./Zip.md)、[unzip](./Zip.md)、`tar`。
 
 ---
 
