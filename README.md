@@ -14,6 +14,9 @@
 - Scrapy
 - SpringBoot
 - SQLite
+- Web
+    - Server
+        - [Nginx](./Web/Server/Nginx/Nginx.md)
 - WebAPI
 
 
