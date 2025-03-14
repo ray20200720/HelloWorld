@@ -127,6 +127,7 @@ hello-world/
 `App.js` 文件的完整代碼：
 ```javascript
 import React from 'react';
+import './App.css';
 
 function App() {
   return (
