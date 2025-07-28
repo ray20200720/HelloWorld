@@ -16,7 +16,7 @@
    ```
 
 2. **撰寫 TypeScript 程式碼**
-   
+
    ```ts
    import sqlite3 from 'sqlite3';
 
@@ -157,6 +157,68 @@
 - 若使用 TypeORM，也可以透過 Entity 定義自動建立資料表。
 
 ---
+
+
+# 如何用 TypeScript 讀取 SQLite 多筆資料?
+
+要在 TypeScript 中讀取 SQLite 的多筆資料，可以使用 `sqlite3` 套件並搭配 `db.all()` 方法來查詢多筆結果。
+
+以下是一個簡單範例：
+
+```typescript
+import sqlite3 from 'sqlite3';
+
+// 開啟資料庫
+const db = new sqlite3.Database('example.db');
+
+// 查詢多筆資料
+db.all('SELECT * FROM users', (err, rows) => {
+  if (err) {
+    console.error('查詢失敗:', err);
+    return;
+  }
+  console.log('查詢結果:', rows);
+});
+```
+
+### ✅ 小提醒
+- `db.all()` 會回傳一個陣列，包含所有符合條件的資料列。
+- 若使用的是 ES module，記得處理 `__dirname` 的問題，例如用 `fileURLToPath(import.meta.url)` 來取得路徑。
+- 若想使用 Promise 風格，可以搭配 `util.promisify()` 來轉換 `db.all()` 為 async/await 語法。
+
+### 使用 `Promise` 和 `async/await` 的版本
+
+當然可以！以下是將 SQLite 多筆資料查詢改寫為使用 `Promise` 和 `async/await` 的版本：
+
+```typescript
+import sqlite3 from 'sqlite3';
+import { promisify } from 'util';
+
+// 開啟資料庫
+const db = new sqlite3.Database('example.db');
+
+// 使用 promisify 將 db.all 轉換成 Promise
+const dbAllAsync = promisify(db.all).bind(db);
+
+async function getUsers() {
+  try {
+    const rows = await dbAllAsync('SELECT * FROM users');
+    console.log('查詢結果:', rows);
+  } catch (err) {
+    console.error('查詢失敗:', err);
+  } finally {
+    db.close();
+  }
+}
+
+// 執行查詢
+getUsers();
+```
+
+### 🔍 說明
+- `promisify()` 來自 Node.js 的 `util` 模組，它能將 callback-style 的函式轉成 Promise。
+- `bind(db)` 是為了確保 `this` 正確指向資料庫物件。
+- 用 `async/await` 方式讓程式碼更易讀且易於錯誤處理。
 
 # 如何用 TypeScript 在 SQLite 新增一筆及多筆資料?
 
@@ -372,7 +434,7 @@ db.close();
 
 ---
 
-# 批次處理 
+# 批次處理
 
 批次處理（Batch Processing）是一種一次性處理大量資料或任務的方式，常用於資料庫操作、自動化任務、影像處理、系統維護等場景。
 
@@ -420,3 +482,78 @@ db.close();
 
 ---
 
+
+# Common JS
+
+   ```ts
+   import sqlite3 from 'sqlite3';
+
+   const db = new sqlite3.Database('example.db');
+
+   db.get('SELECT name FROM users WHERE id = ?', [1], (err, row) => {
+     if (err) {
+       console.error('查詢錯誤:', err);
+     } else {
+       console.log('查詢結果:', row);
+     }
+   });
+
+   db.close();
+   ```
+
+寫法其實是 *CommonJS* 和 *ES Modules* 的混合體，但嚴格來說，它不是純正的 CommonJS 寫法。
+
+### 🤔 哪裡不完全是 CommonJS？
+- `import sqlite3 from 'sqlite3'` 是 **ES Modules** 的語法（通常寫在 `.mjs` 檔案，或 `package.json` 設定 `"type": "module"` 時才可使用）。
+- 而 CommonJS 的寫法應該是：
+  ```js
+  const sqlite3 = require('sqlite3');
+  ```
+
+也就是說，如果沒使用 ES Modules 設定，這段程式碼會報錯。
+
+---
+
+### 🛠️ CommonJS 的使用時機
+
+會在這些情境下使用 CommonJS：
+- 開發 **Node.js** 應用，尤其是傳統專案（Node.js 預設支援 CommonJS）
+- 使用 **老舊套件** 或框架還沒轉換到 ES Modules
+- 撰寫 **簡單腳本**（如 CLI 工具）時不需要模組管理太複雜
+- 想快速用 `require()` 匯入套件、無需 async setup（ESM 模組會強制 top-level await）
+
+---
+
+### 📦 CommonJS vs ES Modules 對比
+
+| 特性 | CommonJS | ES Modules |
+|------|----------|------------|
+| 匯入語法 | `require()` | `import` |
+| 匯出語法 | `module.exports` | `export` |
+| 支援度 | Node.js 原生 | Node.js 14+ 要設定 |
+| 同步/非同步 | 同步載入 | 非同步載入 |
+| 檔名 | `.js` | 通常用 `.mjs` 或設 `type: module` |
+
+---
+
+程式碼 轉換成 **純 CommonJS** 的版本：
+
+```js
+const sqlite3 = require('sqlite3');
+
+// 開啟資料庫
+const db = new sqlite3.Database('example.db');
+
+// 查詢多筆資料
+db.all('SELECT * FROM users', (err, rows) => {
+  if (err) {
+    console.error('查詢失敗:', err);
+    return;
+  }
+  console.log('查詢結果:', rows);
+});
+```
+
+---
+
+💡 這樣的寫法在 Node.js 預設環境中執行完全沒問題，不需要額外設定 `type: "module"` 或改用 `.mjs`。非常適合快速開發或與老舊套件搭配使用。
