@@ -2,7 +2,7 @@
 
 ## Windows 下載
 
-至官網 [SQLite](https://www.sqlite.org/download.html) 的 `Precompiled Binaries for Windows` 下載 `sqlite-tools-win32-x86-xxxxxxx.zip`
+至官網 [SQLite](https://www.sqlite.org/download.html) 的 `Precompiled Binaries for Windows` 下載 `sqlite-tools-win-x64-xxxxxxx.zip`
 
 ## Linux 下載
 
@@ -12,13 +12,13 @@
 
 ## 執行 SQLite
 
-將 `sqlite-tools-win32-x86-xxxxxxx.zip` 解壓縮
+將 `sqlite-tools-win-x64-xxxxxxx.zip` 解壓縮
 
 開啟 命令提示字元 , 切換至剛才解壓縮後的目錄底下, 執行`sqlite3.exe` 
 
 ``` bash
-D:\Software\SQLite\sqlite-tools-win32-x86-3430100>sqlite3.exe
-SQLite version 3.43.1 2023-09-11 12:01:27
+D:\Software\SQLite\sqlite-tools-win-x64-3500300>sqlite3.exe
+SQLite version 3.50.3 2025-07-17 13:25:10
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
@@ -43,9 +43,9 @@ sqlite>.help
 
 ``` bash
 sqlite> .version
-SQLite 3.43.1 2023-09-11 12:01:27 2d3a40c05c49e1a49264912b1a05bc2143ac0e7c3df588276ce80a4cbc9bd1b0
-zlib version 1.2.11
-gcc-5.2.0 (32-bit)
+SQLite 3.50.3 2025-07-17 13:25:10 3ce993b8657d6d9deda380a93cdd6404a8c8ba1b185b2bc423703e41ae5f2543
+zlib version 1.3
+msvc-1939 (64-bit)
 ```
 
 ### 查看 資訊
@@ -98,16 +98,18 @@ rowseparator: "\n"
 
 ``` bash
 sqlite> .database
-main: D:\Software\SQLite\sqlite-tools-win32-x86-3430100\HelloWorld.db r/w
+main: D:\Software\SQLite\sqlite-tools-win-x64-3500300\HelloWorld.db r/w
 ```
 
 ## 新建 table
 
 ``` bash
-sqlite> create table Product (
-(x1...> ID INT PRIMARY KEY NOT NULL,
-(x1...> NAME TEXT NOT NULL
-(x1...> );
+sqlite> CREATE TABLE programming_languages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    year_created INTEGER,
+    author TEXT
+);
 ```
 
 ## 查看 table
@@ -120,7 +122,7 @@ Product
 ## 刪除 table
 
 ``` bash
-sqlite> drop table Product;
+sqlite> drop table programming_languages;
 ```
 
 ``` bash
@@ -130,27 +132,31 @@ sqlite> .table
 ## 填入資料
 
 ``` bash
-sqlite> insert into Product values (1, 'Hello');
-sqlite> insert into Product values (2, 'World');
+sqlite> INSERT INTO programming_languages (name, year_created, author) VALUES ('Python', 1991, 'Guido van Rossum');
+sqlite> INSERT INTO programming_languages (name, year_created, author) VALUES ('JavaScript', 1995, 'Brendan Eich');
+sqlite> INSERT INTO programming_languages (name, year_created, author) VALUES ('Go', 2009, 'Robert Griesemer, Rob Pike, Ken Thompson');
+
 ```
 
 ## 查找資料
 
 ``` bash
-sqlite> select * from Product;
-1|Hello
-2|World
+sqlite> SELECT * FROM programming_languages;
+1|Python|1991|Guido van Rossum
+2|JavaScript|1995|Brendan Eich
+3|Go|2009|Robert Griesemer, Rob Pike, Ken Thompson
 ```
 
 ## 刪除資料
 
 ``` bash
-sqlite> delete from Product where ID = 1;
+sqlite> DELETE FROM programming_languages WHERE ID = 1;
 ```
 
 ``` bash
-sqlite> select * from Product;
-2|World
+sqlite> SELECT * FROM programming_languages;
+2|JavaScript|1995|Brendan Eich
+3|Go|2009|Robert Griesemer, Rob Pike, Ken Thompson
 ```
 
 # 用程式語言讀取 SQLite 資料
@@ -172,8 +178,8 @@ const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database('HelloWorld.db')
 
 db.serialize(()=> {
-    db.each("SELECT * FROM Product", (err, row) => {
-        console.log(row.ID + ": " + row.NAME)
+    db.each("SELECT * FROM programming_languages", (err, row) => {
+        console.log(row.ID + ": " + row.name)
     })
 })
 
@@ -182,8 +188,9 @@ db.close();
 
 ``` bash
 $ node main.js
-1: Hello
-2: World
+1: Python
+2: JavaScript
+3: Go
 ```
 
 ## .NET
@@ -225,7 +232,7 @@ namespace HelloWorld
 
                 var command = connection.CreateCommand();
                 
-                command.CommandText = @"SELECT * FROM Product";
+                command.CommandText = @"SELECT * FROM programming_languages";
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -246,10 +253,8 @@ namespace HelloWorld
 
 ``` bash
 > dotnet run
-1:Hello!
-2:World!
+1: Python
+2: JavaScript
+3: Go
 ```
 
-## ASP.NET
-
-### 創建 Console App (.NET Framework) 專案
