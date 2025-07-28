@@ -1,4 +1,6 @@
-在Windows下安裝Nginx，以下是詳細的步驟：
+# 如何在Windows下安裝Nginx?
+
+在Windows下安裝Nginx,以下是詳細的步驟：
 
 ### 安裝步驟：
 
@@ -56,4 +58,6 @@
     nginx -s quit
     ```
 
-這些步驟應該能夠幫助你在Windows上安裝和運行Nginx。安裝完成後，你可以根據需求修改Nginx的配置文件（位於`conf/nginx.conf`）以適應不同的應用場景。
+按照上述這些步驟執行後,應能在Windows上成功安裝和運行Nginx。
+
+安裝完成後，可以根據需求修改Nginx的配置文件（位於`conf/nginx.conf`）以適應不同的應用場景。
